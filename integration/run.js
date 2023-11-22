@@ -12,9 +12,6 @@ const common = {
   },
   create: {
     schema: schema,
-    create: {
-      include_type_name: false
-    }
   },
   summaryMap: (res) => {
     return res.hits.hits.map(h => {
@@ -26,8 +23,8 @@ const common = {
     });
   },
   summary: (res) => {
-    common.summaryMap( res )
-          .forEach( console.dir );
+    common.summaryMap(res)
+      .forEach(console.dir);
   },
   bucketTokens: tokens => {
     const positions = {};
@@ -52,7 +49,7 @@ const common = {
       }
     });
     // sort all the arrays so that order is irrelevant
-    for (var attr in positions){
+    for (var attr in positions) {
       positions[attr] = positions[attr].sort();
     }
     return positions;
@@ -83,7 +80,7 @@ const common = {
   }
 };
 
-function removeIndexTokensFromExpectedTokens(index, expected){
+function removeIndexTokensFromExpectedTokens(index, expected) {
   for (var pos in index) {
     if (!_.isArray(expected[pos])) { continue; }
     expected[pos] = expected[pos].filter(token => !index[pos].includes(token));
@@ -114,6 +111,6 @@ var tests = [
   require('./admin_abbreviations.js')
 ];
 
-tests.map(function(t) {
+tests.map(function (t) {
   t.all(tape, common);
 });
